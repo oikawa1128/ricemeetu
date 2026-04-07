@@ -1075,47 +1075,89 @@
 
       .inner { padding: 0 20px; }
 
-      #hero {
-        height: calc(100svh - var(--header-h));
-      }
-
+      /* HERO */
+      #hero { height: calc(100svh - var(--header-h)); }
+      .hero__bottom { padding: 48px 20px 36px; }
       .hero__cta { flex-direction: column; width: 100%; }
       .hero__cta .btn { width: 100%; text-align: center; }
+      .hero__sub { font-size: 0.95rem; }
 
+      /* SECTIONS - padding reduction */
+      #why, #concept, #team, #story, #contact { padding: 72px 0; }
+      #products, #field, #science { padding: 72px 0; }
+
+      /* SECTION COMMON */
+      .sec-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      .why__body,
+      .concept__body,
+      .team__body,
+      .story__body,
+      .field__body,
+      .ingr__body { margin-top: 24px; }
+
+      /* GRIDS → single column */
       .why__grid,
       .story__grid,
       .concept__grid,
       .team__grid,
       .field__grid,
-      .contact__grid { grid-template-columns: 1fr; gap: 36px; }
+      .contact__grid { grid-template-columns: 1fr; gap: 32px; }
 
-      .team__cards { grid-template-columns: 1fr; }
+      /* TEAM */
+      .team__cards { grid-template-columns: 1fr; margin-top: 32px; }
 
+      /* PRODUCTS */
       .products__grid { grid-template-columns: 1fr; }
+      .p-card__desc { min-height: unset; } /* 1列レイアウトでは高さ揃え不要 */
+
+      /* MAKE YOUR OWN */
       .homemade-grid { grid-template-columns: 1fr; }
       .stick-card { padding: 24px 20px; }
+
+      /* ON THE FIELD - スマホで折り返し許可 */
+      #field .sec-title { white-space: normal; font-size: clamp(2.2rem, 9vw, 3.2rem); }
+
+      /* SCIENCE */
       .ingr__grid { grid-template-columns: 1fr; gap: 36px; }
       .ingr__visual { max-width: 100%; }
 
+      /* CONTACT */
+      .contact__grid { margin-top: 40px; }
+
+      /* GALLERY */
+      .gallery__header { padding: 0 20px; }
+      .gallery__track { padding: 0 20px; }
+      .gallery__item { width: clamp(220px, 72vw, 320px); }
+
+      /* FOOTER */
       .footer__top { flex-direction: column; text-align: center; }
       .footer__nav { flex-wrap: wrap; justify-content: center; }
       .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
 
-      .sec-title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+      /* BUTTONS */
       .btn { width: 100%; text-align: center; }
       .ingr__btn { width: auto; }
     }
 
     @media (max-width: 480px) {
-      #why, #story, #concept, #team { padding: 64px 0; }
-      #products, #field, #science { padding: 64px 0; }
-      #contact { padding: 64px 0; }
+      #why, #story, #concept, #team, #contact { padding: 56px 0; }
+      #products, #field, #science { padding: 56px 0; }
 
       .story__body,
       .concept__body,
       .why__body { font-size: 0.93rem; }
+
       .t-card { padding: 22px 18px; }
       .p-card__body { padding: 24px 20px; }
+
+      /* stick stats - 狭い画面で折り返し */
+      .stick-card__stats { flex-wrap: wrap; gap: 16px; }
+
+      /* field schedule */
+      .field__schedule { padding: 20px; }
+
+      /* hero sub text */
+      .hero__sub { font-size: 0.88rem; letter-spacing: 0.03em; }
     }
   </style>
 </head>
