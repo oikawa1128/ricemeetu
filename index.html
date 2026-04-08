@@ -853,7 +853,7 @@
 
     /* ── CONTACT ── */
     #contact {
-      background: var(--bg-warm);
+      background: var(--bg);
       padding: 120px 0;
     }
 
@@ -1069,6 +1069,68 @@
       opacity: 1;
     }
 
+    /* ── FAQ ── */
+    #faq {
+      background: var(--bg-warm);
+      padding: 120px 0;
+    }
+
+    .faq__list {
+      max-width: 720px;
+      margin: 40px auto 0;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid rgba(28,28,28,0.1);
+    }
+
+    .faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      transition: color 0.2s;
+      user-select: none;
+    }
+
+    .faq__question:hover {
+      color: rgba(28,28,28,0.6);
+    }
+
+    .faq__icon {
+      font-size: 1.2rem;
+      color: rgba(28,28,28,0.3);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+
+    .faq__item.is-open .faq__icon {
+      transform: rotate(45deg);
+    }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq__answer-inner {
+      padding: 0 0 20px;
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: rgba(28,28,28,0.7);
+    }
+
+    .faq__answer-inner strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       :root { --header-h: 68px; }
@@ -1141,8 +1203,13 @@
       .ingr__btn { width: auto; }
     }
 
+    @media (max-width: 768px) {
+      #faq { padding: 72px 0; }
+      .faq__question { font-size: 0.88rem; }
+    }
+
     @media (max-width: 480px) {
-      #why, #story, #concept, #team, #contact { padding: 56px 0; }
+      #why, #story, #concept, #team, #contact, #faq { padding: 56px 0; }
       #products, #field, #science { padding: 56px 0; }
 
       .story__body,
@@ -1178,6 +1245,7 @@
         <li><a href="#products">Products</a></li>
         <li><a href="#team">Team Plan</a></li>
         <li><a href="#story">Story</a></li>
+        <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a href="https://www.instagram.com/rice_meet_u/" target="_blank" class="nav-sns" aria-label="Instagram">
@@ -1200,6 +1268,7 @@
     <li><a href="#science" class="nav-close">Science</a></li>
     <li><a href="#team" class="nav-close">Team Plan</a></li>
     <li><a href="#story" class="nav-close">Story</a></li>
+    <li><a href="#faq" class="nav-close">FAQ</a></li>
     <li><a href="#contact" class="nav-close">Contact</a></li>
   </ul>
   <a href="https://shop.ricemeetu.com/" target="_blank" class="btn btn-gold">Shop →</a>
@@ -1537,7 +1606,7 @@
 <section id="gallery">
   <div class="gallery__header" data-anim>
     <h2 class="sec-title">GALLERY</h2>
-    <p class="sec-subtitle-ja">ピッチサイドからの記録</p>
+    <p class="sec-subtitle-ja">導入事例</p>
     <div class="sec-line"></div>
   </div>
   <div class="gallery__scroll-wrap" id="galleryScroll">
@@ -1627,6 +1696,79 @@
         </p>
         <a href="https://shop.ricemeetu.com/" target="_blank" class="btn btn-gold" style="margin-top:32px;">試してみる →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq">
+  <div class="inner">
+    <h2 class="sec-title" data-anim>FAQ</h2>
+    <p class="sec-subtitle-ja">よくある質問</p>
+    <div class="sec-line"></div>
+
+    <div class="faq__list">
+
+      <div class="faq__item">
+        <div class="faq__question">
+          <span>なんで冷凍なの？</span>
+          <span class="faq__icon">+</span>
+        </div>
+        <div class="faq__answer">
+          <p class="faq__answer-inner">酵素が生きているので、最高の状態でお届けするために冷凍でお届けしています。</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question">
+          <span>賞味期限はどれくらいですか？</span>
+          <span class="faq__icon">+</span>
+        </div>
+        <div class="faq__answer">
+          <p class="faq__answer-inner">冷凍で1年、解凍後は冷蔵で1週間です。</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question">
+          <span>甘酒と何が違うの？</span>
+          <span class="faq__icon">+</span>
+        </div>
+        <div class="faq__answer">
+          <p class="faq__answer-inner">甘酒には酒粕の甘酒と麹の甘酒の大きく2種類がありますが、RICE!は麹から取り出した酵素のみを使ってお米を発酵させています。麹菌そのものは使用せず、酵素の力だけで米のデンプンをグルコース（天然の糖）に変換しています。</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question">
+          <span>子どもでも飲めますか？</span>
+          <span class="faq__icon">+</span>
+        </div>
+        <div class="faq__answer">
+          <p class="faq__answer-inner">はい。カフェインゼロ・添加物不使用ですので、お子様にも安心してお召し上がりいただけます。</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question">
+          <span>BOOST・RECOVERY・DAILY、どれを選べばいい？</span>
+          <span class="faq__icon">+</span>
+        </div>
+        <div class="faq__answer">
+          <p class="faq__answer-inner">試合中のパフォーマンスや足のつりが気になる方は<strong>BOOST</strong>、試合後のリカバリーや翌日の疲れが気になる方は<strong>RECOVERY</strong>、毎日の食事や補食・コンディショニングには<strong>DAILY</strong>をお選びください。</p>
+        </div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question">
+          <span>定期購入はすぐ解約できますか？</span>
+          <span class="faq__icon">+</span>
+        </div>
+        <div class="faq__answer">
+          <p class="faq__answer-inner">はい。ご連絡いただければすぐに停止・解約いたします。回数の縛りはありません。</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1807,6 +1949,29 @@
       this.reset();
     }
   });
+
+// FAQ Accordion
+document.querySelectorAll('.faq__question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('is-open');
+
+    // 他を全部閉じる
+    document.querySelectorAll('.faq__item.is-open').forEach(openItem => {
+      openItem.classList.remove('is-open');
+      openItem.querySelector('.faq__answer').style.maxHeight = null;
+      openItem.querySelector('.faq__icon').textContent = '+';
+    });
+
+    // クリックしたものを開く（すでに開いていた場合は閉じたまま）
+    if (!isOpen) {
+      item.classList.add('is-open');
+      const answer = item.querySelector('.faq__answer');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      item.querySelector('.faq__icon').textContent = '−';
+    }
+  });
+});
 </script>
 </body>
 </html>
