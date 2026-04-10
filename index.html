@@ -371,8 +371,10 @@
 
     .products__grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 880px;
+      margin: 0 auto;
     }
 
     .p-card {
@@ -490,7 +492,7 @@
       line-height: 1.8;
       color: rgba(255,255,255,0.72);
       margin-bottom: 24px;
-      min-height: 9.5rem;
+      min-height: 7rem;
     }
 
     .p-card--boost { border-top-color: var(--accent); }
