@@ -714,6 +714,49 @@
     </div>
 
     <div class="form-group">
+      <label class="form-label" for="shipName">配送先 宛名<span class="req">*</span></label>
+      <input type="text" id="shipName" name="shipName" class="form-input" placeholder="〇〇FC 田中太郎">
+      <p class="form-error" id="shipNameErr">宛名を入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="shipZip">郵便番号<span class="req">*</span></label>
+      <input type="text" id="shipZip" name="shipZip" class="form-input" placeholder="123-4567" maxlength="8" style="max-width:160px;">
+      <p class="form-error" id="shipZipErr">郵便番号を入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="shipPref">都道府県<span class="req">*</span></label>
+      <div class="form-select-wrap" style="max-width:200px;">
+        <select id="shipPref" name="shipPref" class="form-select">
+          <option value="" disabled selected>選択してください</option>
+          <option>北海道</option><option>青森県</option><option>岩手県</option><option>宮城県</option><option>秋田県</option>
+          <option>山形県</option><option>福島県</option><option>茨城県</option><option>栃木県</option><option>群馬県</option>
+          <option>埼玉県</option><option>千葉県</option><option>東京都</option><option>神奈川県</option><option>新潟県</option>
+          <option>富山県</option><option>石川県</option><option>福井県</option><option>山梨県</option><option>長野県</option>
+          <option>岐阜県</option><option>静岡県</option><option>愛知県</option><option>三重県</option><option>滋賀県</option>
+          <option>京都府</option><option>大阪府</option><option>兵庫県</option><option>奈良県</option><option>和歌山県</option>
+          <option>鳥取県</option><option>島根県</option><option>岡山県</option><option>広島県</option><option>山口県</option>
+          <option>徳島県</option><option>香川県</option><option>愛媛県</option><option>高知県</option><option>福岡県</option>
+          <option>佐賀県</option><option>長崎県</option><option>熊本県</option><option>大分県</option><option>宮崎県</option>
+          <option>鹿児島県</option><option>沖縄県</option>
+        </select>
+      </div>
+      <p class="form-error" id="shipPrefErr">都道府県を選択してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="shipAddr">市区町村・番地<span class="req">*</span></label>
+      <input type="text" id="shipAddr" name="shipAddr" class="form-input" placeholder="大網白里市長国963-15">
+      <p class="form-error" id="shipAddrErr">市区町村・番地を入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="shipBuilding">建物名・部屋番号<span style="font-weight:400;color:rgba(0,0,0,0.4);margin-left:6px;">（任意）</span></label>
+      <input type="text" id="shipBuilding" name="shipBuilding" class="form-input" placeholder="〇〇ビル 101号室">
+    </div>
+
+    <div class="form-group">
       <label class="form-label" for="deliveryDay">お届け希望日<span class="req">*</span></label>
       <div class="form-select-wrap">
         <select id="deliveryDay" name="deliveryDay" class="form-select">
@@ -879,6 +922,10 @@
       { id: 'repName',  errId: 'repNameErr',  check: v => v.trim() !== '' },
       { id: 'email',    errId: 'emailErr',    check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
       { id: 'tel',      errId: 'telErr',      check: v => v.trim() !== '' },
+      { id: 'shipName',    errId: 'shipNameErr',    check: v => v.trim() !== '' },
+      { id: 'shipZip',     errId: 'shipZipErr',     check: v => v.trim() !== '' },
+      { id: 'shipPref',    errId: 'shipPrefErr',    check: v => v !== '' },
+      { id: 'shipAddr',    errId: 'shipAddrErr',    check: v => v.trim() !== '' },
       { id: 'deliveryDay', errId: 'deliveryDayErr', check: v => v !== '' }
     ];
 
@@ -944,6 +991,11 @@
       packRecovery: kr,
       totalQty:     totalQty,
       totalPrice:   totalPrice,
+      shipName:     document.getElementById('shipName').value.trim(),
+      shipZip:      document.getElementById('shipZip').value.trim(),
+      shipPref:     document.getElementById('shipPref').value,
+      shipAddr:     document.getElementById('shipAddr').value.trim(),
+      shipBuilding: document.getElementById('shipBuilding').value.trim(),
       frequency:    document.querySelector('input[name="frequency"]').value,
       deliveryDay:  document.getElementById('deliveryDay').value,
       payment:      document.querySelector('input[name="payment"]:checked').value,
