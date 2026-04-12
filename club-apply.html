@@ -683,26 +683,9 @@
     <p class="form-section-title">Delivery</p>
 
     <div class="form-group">
-      <label class="form-label">配送頻度<span class="req">*</span></label>
-      <div class="radio-group" id="freqGroup">
-        <label class="radio-label" data-value="隔月配送">
-          <input type="radio" name="frequency" value="隔月配送">
-          <span class="radio-label__check"></span>
-          <span class="radio-label__body">
-            隔月配送（推奨）
-            <span class="radio-label__sub">2ヶ月に1回お届け</span>
-          </span>
-        </label>
-        <label class="radio-label" data-value="毎月配送">
-          <input type="radio" name="frequency" value="毎月配送">
-          <span class="radio-label__check"></span>
-          <span class="radio-label__body">
-            毎月配送
-            <span class="radio-label__sub">毎月1回お届け</span>
-          </span>
-        </label>
-      </div>
-      <p class="form-error" id="freqErr">配送頻度を選択してください</p>
+      <label class="form-label">配送頻度</label>
+      <p style="font-size:0.95rem;padding:14px 0 4px;">毎月配送（毎月1回お届け）</p>
+      <input type="hidden" name="frequency" value="毎月配送">
     </div>
 
     <div class="form-group">
@@ -722,6 +705,30 @@
       <p class="form-error" id="deliveryDayErr">お届け希望日を選択してください</p>
     </div>
 
+    <!-- お支払い方法 -->
+    <p class="form-section-title">Payment</p>
+    <div class="form-group">
+      <label class="form-label">お支払い方法<span class="req">*</span></label>
+      <div class="radio-group" id="paymentGroup">
+        <label class="radio-label" data-value="オンライン決済">
+          <input type="radio" name="payment" value="オンライン決済" checked>
+          <span class="radio-label__check"></span>
+          <span class="radio-label__body">
+            オンライン決済
+            <span class="radio-label__sub">クレジットカード等・手数料無料</span>
+          </span>
+        </label>
+        <label class="radio-label" data-value="銀行振込">
+          <input type="radio" name="payment" value="銀行振込">
+          <span class="radio-label__check"></span>
+          <span class="radio-label__body">
+            銀行振込
+            <span class="radio-label__sub">振込手数料はご負担ください</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
     <!-- 備考 -->
     <p class="form-section-title">Remarks</p>
     <div class="form-group">
@@ -732,8 +739,8 @@
     <!-- 注意書き -->
     <div class="apply-note">
       <strong>【お支払いについて】</strong><br>
-      クラブプランのお支払いは<strong>銀行振込</strong>となります。<br>
-      申込後、担当者よりメールにてお振込先をご案内いたします。<br><br>
+      オンライン決済を選択された場合、申込後にお支払い用リンクをお送りします。<br>
+      銀行振込を選択された場合、担当者よりお振込先をご案内いたします。<br><br>
       ※ お届け希望日はあくまで「希望」であり、在庫・物流状況に応じて調整となる場合があります。
     </div>
 
@@ -843,11 +850,7 @@
       }
     });
 
-    // 配送頻度
-    const freq = document.querySelector('input[name="frequency"]:checked');
-    const freqErr = document.getElementById('freqErr');
-    if (!freq) { freqErr.classList.add('is-show'); ok = false; }
-    else        { freqErr.classList.remove('is-show'); }
+    // 配送頻度（固定値のためバリデーション不要）
 
     // 数量合計
     const total = ['pouchBoost','pouchRecovery','packBoost','packRecovery']
@@ -887,18 +890,17 @@
       packRecovery: kr,
       totalQty:     totalQty,
       totalPrice:   totalPrice,
-      frequency:    document.querySelector('input[name="frequency"]:checked').value,
+      frequency:    document.querySelector('input[name="frequency"]').value,
       deliveryDay:  document.getElementById('deliveryDay').value,
+      payment:      document.querySelector('input[name="payment"]:checked').value,
       remarks:      document.getElementById('remarks').value.trim()
     };
 
     try {
       const params = new URLSearchParams(payload);
-      await fetch(GAS_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString()
+      await fetch(GAS_URL + '?' + params.toString(), {
+        method: 'GET',
+        mode: 'no-cors'
       });
       // no-cors のためレスポンスは読めないが正常とみなす
       document.getElementById('applyForm').style.display = 'none';
