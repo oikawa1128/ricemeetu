@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クラブプラン申込 | RICE MEET U</title>
+  <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PTNH31NZWS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PTNH31NZWS');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafafa;
+      --bg-dark: #1c1c1c;
+      --text: #1c1c1c;
+      --accent: #ffd700;
+      --accent-hover: #e6c200;
+      --border: rgba(0,0,0,0.1);
+      --error: #e53935;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'M PLUS 1p', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ── */
+    .apply-header {
+      background: var(--bg-dark);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .apply-header__logo img {
+      height: 36px;
+      filter: brightness(0) invert(1);
+    }
+    .apply-header__back {
+      font-family: 'Teko', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .apply-header__back:hover { color: var(--accent); }
+
+    /* ── HERO BANNER ── */
+    .apply-hero {
+      background: var(--bg-dark);
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+    .apply-hero__label {
+      font-family: 'Teko', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .apply-hero__title {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #fafafa;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .apply-hero__sub {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── BENEFITS BANNER ── */
+    .benefits {
+      background: var(--accent);
+      padding: 20px 32px;
+    }
+    .benefits__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .benefits__item {
+      text-align: center;
+      padding: 0 16px;
+      border-right: 1px solid rgba(0,0,0,0.15);
+    }
+    .benefits__item:last-child { border-right: none; }
+    .benefits__label {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2px;
+    }
+    .benefits__value {
+      font-family: 'Teko', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--bg-dark);
+      line-height: 1.1;
+    }
+
+    /* ── MAIN ── */
+    .apply-main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .form-section-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      margin: 36px 0 20px;
+    }
+    .form-section-title:first-of-type { margin-top: 0; }
+
+    /* ── FORM GROUP ── */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+    .form-label span.req {
+      color: var(--error);
+      margin-left: 4px;
+      font-size: 0.75rem;
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 12px 14px;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: #fff;
+      transition: border-color 0.2s;
+      outline: none;
+      appearance: none;
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,215,0,0.15);
+    }
+    .form-input.is-error,
+    .form-select.is-error,
+    .form-textarea.is-error {
+      border-color: var(--error);
+    }
+    .form-error {
+      display: none;
+      font-size: 0.75rem;
+      color: var(--error);
+      margin-top: 4px;
+    }
+    .form-error.is-show { display: block; }
+
+    .form-textarea { resize: vertical; min-height: 100px; }
+
+    .form-select-wrap {
+      position: relative;
+    }
+    .form-select-wrap::after {
+      content: '▼';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.65rem;
+      color: rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .product-item {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 16px;
+      background: #fff;
+    }
+    .product-item__name {
+      font-family: 'Teko', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+    .product-item__name--boost { color: var(--accent); }
+    .product-item__name--recovery { color: #c8892a; }
+    .product-item__type {
+      font-size: 0.72rem;
+      color: rgba(0,0,0,0.45);
+      margin-bottom: 8px;
+    }
+    .product-item__price {
+      font-size: 0.78rem;
+      color: rgba(0,0,0,0.5);
+      margin-bottom: 10px;
+    }
+    .product-item__price s { color: rgba(0,0,0,0.3); }
+    .product-item__price strong { color: var(--text); font-size: 0.88rem; }
+    .product-item__input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .product-item__input-wrap label {
+      font-size: 0.78rem;
+      color: rgba(0,0,0,0.5);
+      white-space: nowrap;
+    }
+    .qty-input {
+      width: 72px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 8px 10px;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 0.92rem;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .qty-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255,215,0,0.15);
+    }
+
+    /* ── SUMMARY ── */
+    .order-summary {
+      background: var(--bg-dark);
+      border-radius: 2px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .order-summary__title {
+      font-family: 'Teko', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .summary-row:last-of-type { border-bottom: none; }
+    .summary-row__label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .summary-row__value {
+      font-family: 'Teko', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fafafa;
+    }
+    .summary-row--total {
+      margin-top: 8px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.15) !important;
+      border-bottom: none !important;
+    }
+    .summary-row--total .summary-row__label {
+      color: #fafafa;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .summary-row--total .summary-row__value {
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .summary-row--discount .summary-row__value {
+      color: #66bb6a;
+    }
+
+    /* ── RADIO ── */
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 12px 20px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: #fff;
+      font-size: 0.88rem;
+      transition: border-color 0.2s, background 0.2s;
+      flex: 1;
+      min-width: 160px;
+    }
+    .radio-label input[type="radio"] { display: none; }
+    .radio-label.is-selected {
+      border-color: var(--accent);
+      background: rgba(255,215,0,0.06);
+      font-weight: 700;
+    }
+    .radio-label__check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    .radio-label.is-selected .radio-label__check {
+      border-color: var(--accent);
+    }
+    .radio-label.is-selected .radio-label__check::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: block;
+    }
+    .radio-label__body { line-height: 1.4; }
+    .radio-label__sub {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(0,0,0,0.45);
+      display: block;
+    }
+
+    /* ── NOTE ── */
+    .apply-note {
+      background: rgba(255,215,0,0.08);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 2px;
+      padding: 16px 20px;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: rgba(0,0,0,0.65);
+      margin-top: 28px;
+    }
+    .apply-note strong { color: var(--text); }
+
+    /* ── SUBMIT ── */
+    .apply-submit-wrap {
+      margin-top: 36px;
+      text-align: center;
+    }
+    .btn-apply {
+      display: inline-block;
+      font-family: 'Teko', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--text);
+      border: none;
+      border-radius: 2px;
+      padding: 18px 56px;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+      width: 100%;
+      max-width: 400px;
+    }
+    .btn-apply:hover { background: var(--accent-hover); }
+    .btn-apply:disabled { opacity: 0.6; cursor: not-allowed; }
+    .apply-submit-note {
+      font-size: 0.75rem;
+      color: rgba(0,0,0,0.45);
+      margin-top: 10px;
+    }
+
+    /* ── THANK YOU ── */
+    #thankyou {
+      display: none;
+      min-height: 80vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 60px 32px;
+    }
+    #thankyou.is-show { display: flex; }
+    .thankyou__icon {
+      font-size: 3.5rem;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .thankyou__title {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      margin-bottom: 12px;
+    }
+    .thankyou__body {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.65);
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .btn-back {
+      font-family: 'Teko', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--bg-dark);
+      color: #fafafa;
+      border: none;
+      border-radius: 2px;
+      padding: 14px 40px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-back:hover { opacity: 0.8; }
+
+    /* ── FOOTER ── */
+    .apply-footer {
+      background: var(--bg-dark);
+      padding: 24px 32px;
+      text-align: center;
+    }
+    .apply-footer p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .apply-header { padding: 0 20px; }
+      .apply-hero { padding: 36px 20px 32px; }
+      .benefits { padding: 16px 20px; }
+      .benefits__value { font-size: 1.25rem; }
+      .benefits__label { font-size: 0.62rem; }
+      .apply-main { padding: 36px 20px 60px; }
+      .product-grid { grid-template-columns: 1fr; }
+      .radio-group { flex-direction: column; }
+      .radio-label { min-width: unset; }
+      .btn-apply { padding: 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="apply-header">
+  <a href="/" class="apply-header__logo">
+    <img src="logo.png" alt="RICE MEET U">
+  </a>
+  <a href="/" class="apply-header__back">
+    <i class="fas fa-arrow-left"></i> Back to Top
+  </a>
+</header>
+
+<!-- HERO -->
+<div class="apply-hero">
+  <p class="apply-hero__label">Club Plan Application</p>
+  <h1 class="apply-hero__title">クラブプラン申込</h1>
+  <p class="apply-hero__sub">クラブ・チームでまとめて導入いただける特別プランです。</p>
+</div>
+
+<!-- BENEFITS -->
+<div class="benefits">
+  <div class="benefits__grid">
+    <div class="benefits__item">
+      <p class="benefits__label">Discount</p>
+      <p class="benefits__value">全品 10% OFF</p>
+    </div>
+    <div class="benefits__item">
+      <p class="benefits__label">Shipping</p>
+      <p class="benefits__value">送料 無料</p>
+    </div>
+    <div class="benefits__item">
+      <p class="benefits__label">Benefit</p>
+      <p class="benefits__value">継続特典 あり</p>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="apply-main">
+
+  <!-- FORM -->
+  <form id="applyForm" novalidate>
+
+    <!-- クラブ情報 -->
+    <p class="form-section-title">Club Info</p>
+
+    <div class="form-group">
+      <label class="form-label" for="clubName">クラブ名<span class="req">*</span></label>
+      <input type="text" id="clubName" name="clubName" class="form-input" placeholder="〇〇FC">
+      <p class="form-error" id="clubNameErr">クラブ名を入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="repName">代表者名<span class="req">*</span></label>
+      <input type="text" id="repName" name="repName" class="form-input" placeholder="山田 太郎">
+      <p class="form-error" id="repNameErr">代表者名を入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="email">メールアドレス<span class="req">*</span></label>
+      <input type="email" id="email" name="email" class="form-input" placeholder="example@mail.com">
+      <p class="form-error" id="emailErr">正しいメールアドレスを入力してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="tel">電話番号<span class="req">*</span></label>
+      <input type="tel" id="tel" name="tel" class="form-input" placeholder="090-1234-5678">
+      <p class="form-error" id="telErr">電話番号を入力してください</p>
+    </div>
+
+    <!-- 注文内容 -->
+    <p class="form-section-title">Order</p>
+    <p class="form-error" id="qtyErr" style="margin-bottom:12px;font-size:0.82rem;">合計1本以上を選択してください</p>
+
+    <!-- パウチ -->
+    <p style="font-size:0.78rem;font-weight:700;color:rgba(0,0,0,0.45);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;">パウチ 200ml</p>
+    <div class="product-grid">
+      <div class="product-item">
+        <p class="product-item__name product-item__name--boost">BOOST</p>
+        <p class="product-item__type">レモン風味 / パウチ 200ml</p>
+        <p class="product-item__price"><s>¥500</s> → <strong>¥450</strong>（10%OFF）</p>
+        <div class="product-item__input-wrap">
+          <input type="number" id="pouchBoost" name="pouchBoost" class="qty-input" value="0" min="0" max="999">
+          <label for="pouchBoost">本</label>
+        </div>
+      </div>
+      <div class="product-item">
+        <p class="product-item__name product-item__name--recovery">RECOVERY</p>
+        <p class="product-item__type">きな粉風味 / パウチ 200ml</p>
+        <p class="product-item__price"><s>¥400</s> → <strong>¥360</strong>（10%OFF）</p>
+        <div class="product-item__input-wrap">
+          <input type="number" id="pouchRecovery" name="pouchRecovery" class="qty-input" value="0" min="0" max="999">
+          <label for="pouchRecovery">本</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- パック -->
+    <p style="font-size:0.78rem;font-weight:700;color:rgba(0,0,0,0.45);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;margin-top:16px;">パック 1L</p>
+    <div class="product-grid">
+      <div class="product-item">
+        <p class="product-item__name product-item__name--boost">BOOST</p>
+        <p class="product-item__type">レモン風味 / パック 1L</p>
+        <p class="product-item__price"><s>¥2,250</s> → <strong>¥2,025</strong>（10%OFF）</p>
+        <div class="product-item__input-wrap">
+          <input type="number" id="packBoost" name="packBoost" class="qty-input" value="0" min="0" max="999">
+          <label for="packBoost">本</label>
+        </div>
+      </div>
+      <div class="product-item">
+        <p class="product-item__name product-item__name--recovery">RECOVERY</p>
+        <p class="product-item__type">きな粉風味 / パック 1L</p>
+        <p class="product-item__price"><s>¥1,800</s> → <strong>¥1,620</strong>（10%OFF）</p>
+        <div class="product-item__input-wrap">
+          <input type="number" id="packRecovery" name="packRecovery" class="qty-input" value="0" min="0" max="999">
+          <label for="packRecovery">本</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- サマリー -->
+    <div class="order-summary">
+      <p class="order-summary__title">Order Summary</p>
+      <div class="summary-row">
+        <span class="summary-row__label">パウチ 小計</span>
+        <span class="summary-row__value" id="sumPouch">¥0</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-row__label">パック 小計</span>
+        <span class="summary-row__value" id="sumPack">¥0</span>
+      </div>
+      <div class="summary-row summary-row--discount">
+        <span class="summary-row__label">割引額（10%OFF）</span>
+        <span class="summary-row__value summary-row--discount" id="sumDiscount">-¥0</span>
+      </div>
+      <div class="summary-row summary-row--total">
+        <span class="summary-row__label">月額合計（税込）</span>
+        <span class="summary-row__value" id="sumTotal">¥0</span>
+      </div>
+    </div>
+
+    <!-- 配送設定 -->
+    <p class="form-section-title">Delivery</p>
+
+    <div class="form-group">
+      <label class="form-label">配送頻度<span class="req">*</span></label>
+      <div class="radio-group" id="freqGroup">
+        <label class="radio-label" data-value="隔月配送">
+          <input type="radio" name="frequency" value="隔月配送">
+          <span class="radio-label__check"></span>
+          <span class="radio-label__body">
+            隔月配送（推奨）
+            <span class="radio-label__sub">2ヶ月に1回お届け</span>
+          </span>
+        </label>
+        <label class="radio-label" data-value="毎月配送">
+          <input type="radio" name="frequency" value="毎月配送">
+          <span class="radio-label__check"></span>
+          <span class="radio-label__body">
+            毎月配送
+            <span class="radio-label__sub">毎月1回お届け</span>
+          </span>
+        </label>
+      </div>
+      <p class="form-error" id="freqErr">配送頻度を選択してください</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="deliveryDay">お届け希望日<span class="req">*</span></label>
+      <div class="form-select-wrap">
+        <select id="deliveryDay" name="deliveryDay" class="form-select">
+          <option value="" disabled selected>選択してください</option>
+          <option value="1日頃">1日頃</option>
+          <option value="5日頃">5日頃</option>
+          <option value="10日頃">10日頃</option>
+          <option value="15日頃">15日頃</option>
+          <option value="20日頃">20日頃</option>
+          <option value="25日頃">25日頃</option>
+          <option value="月末頃">月末頃</option>
+        </select>
+      </div>
+      <p class="form-error" id="deliveryDayErr">お届け希望日を選択してください</p>
+    </div>
+
+    <!-- 備考 -->
+    <p class="form-section-title">Remarks</p>
+    <div class="form-group">
+      <label class="form-label" for="remarks">備考<span style="font-weight:400;color:rgba(0,0,0,0.4);margin-left:6px;">（任意）</span></label>
+      <textarea id="remarks" name="remarks" class="form-textarea" placeholder="アレルギーや配送に関するご要望など"></textarea>
+    </div>
+
+    <!-- 注意書き -->
+    <div class="apply-note">
+      <strong>【お支払いについて】</strong><br>
+      クラブプランのお支払いは<strong>銀行振込</strong>となります。<br>
+      申込後、担当者よりメールにてお振込先をご案内いたします。<br><br>
+      ※ お届け希望日はあくまで「希望」であり、在庫・物流状況に応じて調整となる場合があります。
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="apply-submit-wrap">
+      <button type="submit" class="btn-apply" id="submitBtn">申し込む →</button>
+      <p class="apply-submit-note">送信後、担当者よりご連絡いたします（3営業日以内）</p>
+    </div>
+
+  </form>
+
+  <!-- THANK YOU -->
+  <div id="thankyou">
+    <div class="thankyou__icon"><i class="fas fa-check-circle"></i></div>
+    <h2 class="thankyou__title">Thank You!</h2>
+    <p class="thankyou__body">
+      お申し込みありがとうございます。<br>
+      担当者より3営業日以内にご連絡いたします。<br>
+      しばらくお待ちください。
+    </p>
+    <a href="/" class="btn-back">← トップに戻る</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="apply-footer">
+  <p>© 2026 RICE MEET U株式会社 — 〒299-3215 千葉県大網白里市長国963-15</p>
+</footer>
+
+<script>
+  // ── GAS URL（Step 3 でここを差し替える）──
+  const GAS_URL = 'YOUR_GAS_WEB_APP_URL_HERE';
+
+  // ── 価格設定 ──
+  const PRICES = {
+    pouchBoost:    { sale: 450, original: 500 },
+    pouchRecovery: { sale: 360, original: 400 },
+    packBoost:     { sale: 2025, original: 2250 },
+    packRecovery:  { sale: 1620, original: 1800 }
+  };
+
+  // ── リアルタイム合計計算 ──
+  function calcSummary() {
+    const pb = parseInt(document.getElementById('pouchBoost').value) || 0;
+    const pr = parseInt(document.getElementById('pouchRecovery').value) || 0;
+    const kb = parseInt(document.getElementById('packBoost').value) || 0;
+    const kr = parseInt(document.getElementById('packRecovery').value) || 0;
+
+    const pouchTotal   = pb * PRICES.pouchBoost.sale + pr * PRICES.pouchRecovery.sale;
+    const packTotal    = kb * PRICES.packBoost.sale  + kr * PRICES.packRecovery.sale;
+    const totalSale    = pouchTotal + packTotal;
+    const totalOrig    = pb * PRICES.pouchBoost.original + pr * PRICES.pouchRecovery.original
+                       + kb * PRICES.packBoost.original  + kr * PRICES.packRecovery.original;
+    const discount     = totalOrig - totalSale;
+
+    document.getElementById('sumPouch').textContent    = '¥' + pouchTotal.toLocaleString();
+    document.getElementById('sumPack').textContent     = '¥' + packTotal.toLocaleString();
+    document.getElementById('sumDiscount').textContent = '-¥' + discount.toLocaleString();
+    document.getElementById('sumTotal').textContent    = '¥' + totalSale.toLocaleString();
+  }
+
+  ['pouchBoost','pouchRecovery','packBoost','packRecovery'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calcSummary);
+  });
+
+  // ── ラジオボタン ──
+  document.querySelectorAll('.radio-label').forEach(label => {
+    label.addEventListener('click', () => {
+      document.querySelectorAll('.radio-label').forEach(l => l.classList.remove('is-selected'));
+      label.classList.add('is-selected');
+      label.querySelector('input[type="radio"]').checked = true;
+    });
+  });
+
+  // ── バリデーション ──
+  function validate() {
+    let ok = true;
+
+    const textFields = [
+      { id: 'clubName', errId: 'clubNameErr', check: v => v.trim() !== '' },
+      { id: 'repName',  errId: 'repNameErr',  check: v => v.trim() !== '' },
+      { id: 'email',    errId: 'emailErr',    check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'tel',      errId: 'telErr',      check: v => v.trim() !== '' },
+      { id: 'deliveryDay', errId: 'deliveryDayErr', check: v => v !== '' }
+    ];
+
+    textFields.forEach(f => {
+      const el  = document.getElementById(f.id);
+      const err = document.getElementById(f.errId);
+      if (!f.check(el.value)) {
+        el.classList.add('is-error');
+        err.classList.add('is-show');
+        ok = false;
+      } else {
+        el.classList.remove('is-error');
+        err.classList.remove('is-show');
+      }
+    });
+
+    // 配送頻度
+    const freq = document.querySelector('input[name="frequency"]:checked');
+    const freqErr = document.getElementById('freqErr');
+    if (!freq) { freqErr.classList.add('is-show'); ok = false; }
+    else        { freqErr.classList.remove('is-show'); }
+
+    // 数量合計
+    const total = ['pouchBoost','pouchRecovery','packBoost','packRecovery']
+      .reduce((s, id) => s + (parseInt(document.getElementById(id).value) || 0), 0);
+    const qtyErr = document.getElementById('qtyErr');
+    if (total < 1) { qtyErr.classList.add('is-show'); ok = false; }
+    else           { qtyErr.classList.remove('is-show'); }
+
+    return ok;
+  }
+
+  // ── 送信 ──
+  document.getElementById('applyForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = '送信中...';
+    btn.disabled = true;
+
+    const pb = parseInt(document.getElementById('pouchBoost').value) || 0;
+    const pr = parseInt(document.getElementById('pouchRecovery').value) || 0;
+    const kb = parseInt(document.getElementById('packBoost').value) || 0;
+    const kr = parseInt(document.getElementById('packRecovery').value) || 0;
+    const totalQty   = pb + pr + kb + kr;
+    const totalPrice = pb * PRICES.pouchBoost.sale + pr * PRICES.pouchRecovery.sale
+                     + kb * PRICES.packBoost.sale  + kr * PRICES.packRecovery.sale;
+
+    const payload = {
+      clubName:     document.getElementById('clubName').value.trim(),
+      repName:      document.getElementById('repName').value.trim(),
+      email:        document.getElementById('email').value.trim(),
+      tel:          document.getElementById('tel').value.trim(),
+      pouchBoost:   pb,
+      pouchRecovery:pr,
+      packBoost:    kb,
+      packRecovery: kr,
+      totalQty:     totalQty,
+      totalPrice:   totalPrice,
+      frequency:    document.querySelector('input[name="frequency"]:checked').value,
+      deliveryDay:  document.getElementById('deliveryDay').value,
+      remarks:      document.getElementById('remarks').value.trim()
+    };
+
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      // no-cors のためレスポンスは読めないが正常とみなす
+      document.getElementById('applyForm').style.display = 'none';
+      document.getElementById('thankyou').classList.add('is-show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch(err) {
+      btn.textContent = '申し込む →';
+      btn.disabled = false;
+      alert('送信に失敗しました。しばらく経ってから再度お試しください。');
+    }
+  });
+</script>
+
+</body>
+</html>
