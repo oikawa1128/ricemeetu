@@ -677,6 +677,7 @@
         <span class="summary-row__label">月額合計（税込）</span>
         <span class="summary-row__value" id="sumTotal">¥0</span>
       </div>
+      <p id="minOrderHint" style="display:none;margin-top:12px;font-size:0.8rem;color:rgba(255,255,255,0.55);text-align:right;"></p>
     </div>
 
     <!-- 配送設定 -->
@@ -810,16 +811,36 @@
       badge.classList.remove('is-show');
     }
     document.getElementById('sumTotal').textContent    = '¥' + totalSale.toLocaleString();
+
+    // あといくらヒント
+    const hint = document.getElementById('minOrderHint');
+    const MIN_ORDER = 3500;
+    if (totalSale === 0) {
+      hint.style.display = 'none';
+    } else if (totalSale < MIN_ORDER) {
+      const remaining = (MIN_ORDER - totalSale).toLocaleString();
+      hint.textContent = `あと¥${remaining} でお申込みできます`;
+      hint.style.display = 'block';
+    } else {
+      hint.style.display = 'none';
+    }
   }
 
   ['pouchBoost','pouchRecovery','packBoost','packRecovery'].forEach(id => {
     document.getElementById(id).addEventListener('input', calcSummary);
   });
 
-  // ── ラジオボタン ──
+  // ── ラジオボタン：初期化（checked 属性があるものを is-selected にする）──
+  document.querySelectorAll('.radio-group').forEach(group => {
+    const checked = group.querySelector('input[type="radio"]:checked');
+    if (checked) checked.closest('.radio-label').classList.add('is-selected');
+  });
+
+  // ── ラジオボタン：クリック（同グループ内のみリセット）──
   document.querySelectorAll('.radio-label').forEach(label => {
     label.addEventListener('click', () => {
-      document.querySelectorAll('.radio-label').forEach(l => l.classList.remove('is-selected'));
+      const group = label.closest('.radio-group');
+      group.querySelectorAll('.radio-label').forEach(l => l.classList.remove('is-selected'));
       label.classList.add('is-selected');
       label.querySelector('input[type="radio"]').checked = true;
     });
