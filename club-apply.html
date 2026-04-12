@@ -677,7 +677,7 @@
         <span class="summary-row__label">月額合計（税込）</span>
         <span class="summary-row__value" id="sumTotal">¥0</span>
       </div>
-      <p id="minOrderHint" style="display:none;margin-top:12px;font-size:0.8rem;color:rgba(255,255,255,0.55);text-align:right;"></p>
+      <p id="minOrderHint" style="display:none;margin-top:14px;font-size:1rem;font-weight:700;color:var(--accent);text-align:center;letter-spacing:0.02em;"></p>
     </div>
 
     <!-- 配送設定 -->
@@ -890,7 +890,11 @@
   // ── 送信 ──
   document.getElementById('applyForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) {
+      const firstErr = document.querySelector('.form-error.is-show, .is-error');
+      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     const btn = document.getElementById('submitBtn');
     btn.textContent = '送信中...';
