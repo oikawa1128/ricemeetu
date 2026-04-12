@@ -562,7 +562,7 @@
     </div>
     <div class="benefits__item">
       <p class="benefits__label">Shipping</p>
-      <p class="benefits__value">送料 無料</p>
+      <p class="benefits__value">送料 無料<span style="display:block;font-size:0.65rem;font-weight:400;opacity:0.7;margin-top:2px;">※ ¥3,500以上のご注文</span></p>
     </div>
     <div class="benefits__item">
       <p class="benefits__label">Benefit</p>
@@ -606,7 +606,7 @@
 
     <!-- 注文内容 -->
     <p class="form-section-title">Order</p>
-    <p class="form-error" id="qtyErr" style="margin-bottom:12px;font-size:0.82rem;">合計1本以上を選択してください</p>
+    <p class="form-error" id="qtyErr" style="margin-bottom:12px;font-size:0.82rem;">月額合計¥3,500以上からお申込みいただけます</p>
 
     <!-- パウチ -->
     <p style="font-size:0.78rem;font-weight:700;color:rgba(0,0,0,0.45);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:8px;">パウチ 200ml</p>
@@ -852,12 +852,16 @@
 
     // 配送頻度（固定値のためバリデーション不要）
 
-    // 数量合計
-    const total = ['pouchBoost','pouchRecovery','packBoost','packRecovery']
-      .reduce((s, id) => s + (parseInt(document.getElementById(id).value) || 0), 0);
+    // 最低注文金額チェック（¥3,500以上）
+    const pb = parseInt(document.getElementById('pouchBoost').value) || 0;
+    const pr = parseInt(document.getElementById('pouchRecovery').value) || 0;
+    const kb = parseInt(document.getElementById('packBoost').value) || 0;
+    const kr = parseInt(document.getElementById('packRecovery').value) || 0;
+    const totalYen = pb * PRICES.pouchBoost.sale + pr * PRICES.pouchRecovery.sale
+                   + kb * PRICES.packBoost.sale  + kr * PRICES.packRecovery.sale;
     const qtyErr = document.getElementById('qtyErr');
-    if (total < 1) { qtyErr.classList.add('is-show'); ok = false; }
-    else           { qtyErr.classList.remove('is-show'); }
+    if (totalYen < 3500) { qtyErr.classList.add('is-show'); ok = false; }
+    else                 { qtyErr.classList.remove('is-show'); }
 
     return ok;
   }
