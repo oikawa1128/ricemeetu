@@ -335,6 +335,31 @@
       color: #66bb6a;
     }
 
+    .saving-badge {
+      display: none;
+      background: #e53935;
+      border-radius: 2px;
+      padding: 10px 20px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .saving-badge.is-show { display: block; }
+    .saving-badge__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .saving-badge__amount {
+      font-family: 'Teko', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+
     /* ── RADIO ── */
     .radio-group {
       display: flex;
@@ -644,6 +669,10 @@
         <span class="summary-row__label">割引額（10%OFF）</span>
         <span class="summary-row__value summary-row--discount" id="sumDiscount">-¥0</span>
       </div>
+      <div class="saving-badge" id="savingBadge">
+        <p class="saving-badge__label">通常価格より</p>
+        <p class="saving-badge__amount" id="savingAmount">¥0 おトク！</p>
+      </div>
       <div class="summary-row summary-row--total">
         <span class="summary-row__label">月額合計（税込）</span>
         <span class="summary-row__value" id="sumTotal">¥0</span>
@@ -764,6 +793,15 @@
     document.getElementById('sumPouch').textContent    = '¥' + pouchTotal.toLocaleString();
     document.getElementById('sumPack').textContent     = '¥' + packTotal.toLocaleString();
     document.getElementById('sumDiscount').textContent = '-¥' + discount.toLocaleString();
+
+    // いくらお得バッジ
+    const badge = document.getElementById('savingBadge');
+    if (discount > 0) {
+      document.getElementById('savingAmount').textContent = '¥' + discount.toLocaleString() + ' おトク！';
+      badge.classList.add('is-show');
+    } else {
+      badge.classList.remove('is-show');
+    }
     document.getElementById('sumTotal').textContent    = '¥' + totalSale.toLocaleString();
   }
 
@@ -858,7 +896,7 @@
       await fetch(GAS_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(payload)
       });
       // no-cors のためレスポンスは読めないが正常とみなす
