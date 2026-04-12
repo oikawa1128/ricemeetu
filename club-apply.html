@@ -577,6 +577,30 @@
   <!-- FORM -->
   <form id="applyForm" novalidate>
 
+    <!-- 申込種別 -->
+    <p class="form-section-title">Application Type</p>
+    <div class="form-group">
+      <label class="form-label">申込種別<span class="req">*</span></label>
+      <div class="radio-group" id="appTypeGroup">
+        <label class="radio-label" data-value="新規申込">
+          <input type="radio" name="appType" value="新規申込" checked>
+          <span class="radio-label__check"></span>
+          <span class="radio-label__body">
+            新規申込
+            <span class="radio-label__sub">初めてご利用のクラブ</span>
+          </span>
+        </label>
+        <label class="radio-label" data-value="内容変更">
+          <input type="radio" name="appType" value="内容変更">
+          <span class="radio-label__check"></span>
+          <span class="radio-label__body">
+            内容変更
+            <span class="radio-label__sub">注文内容の変更・追加</span>
+          </span>
+        </label>
+      </div>
+    </div>
+
     <!-- クラブ情報 -->
     <p class="form-section-title">Club Info</p>
 
@@ -909,6 +933,7 @@
                      + kb * PRICES.packBoost.sale  + kr * PRICES.packRecovery.sale;
 
     const payload = {
+      appType:      document.querySelector('input[name="appType"]:checked').value,
       clubName:     document.getElementById('clubName').value.trim(),
       repName:      document.getElementById('repName').value.trim(),
       email:        document.getElementById('email').value.trim(),
