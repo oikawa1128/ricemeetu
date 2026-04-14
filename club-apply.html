@@ -187,6 +187,10 @@
       outline: none;
       appearance: none;
     }
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(0,0,0,0.25);
+    }
     .form-input:focus,
     .form-select:focus,
     .form-textarea:focus {
@@ -1016,6 +1020,52 @@
       btn.textContent = '申し込む →';
       btn.disabled = false;
       alert('送信に失敗しました。しばらく経ってから再度お試しください。');
+    }
+  });
+
+  // ── 郵便番号 → 住所自動入力 ──
+  const PREF_CODES = {
+    '01':'北海道','02':'青森県','03':'岩手県','04':'宮城県','05':'秋田県',
+    '06':'山形県','07':'福島県','08':'茨城県','09':'栃木県','10':'群馬県',
+    '11':'埼玉県','12':'千葉県','13':'東京都','14':'神奈川県','15':'新潟県',
+    '16':'富山県','17':'石川県','18':'福井県','19':'山梨県','20':'長野県',
+    '21':'岐阜県','22':'静岡県','23':'愛知県','24':'三重県','25':'滋賀県',
+    '26':'京都府','27':'大阪府','28':'兵庫県','29':'奈良県','30':'和歌山県',
+    '31':'鳥取県','32':'島根県','33':'岡山県','34':'広島県','35':'山口県',
+    '36':'徳島県','37':'香川県','38':'愛媛県','39':'高知県','40':'福岡県',
+    '41':'佐賀県','42':'長崎県','43':'熊本県','44':'大分県','45':'宮崎県',
+    '46':'鹿児島県','47':'沖縄県'
+  };
+
+  document.getElementById('shipZip').addEventListener('input', async function () {
+    const raw = this.value.replace(/-/g, '');
+    if (raw.length !== 7 || !/^\d{7}$/.test(raw)) return;
+
+    try {
+      const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${raw}`);
+      const data = await res.json();
+      if (!data.results) return;
+
+      const r = data.results[0];
+      const prefName = PREF_CODES[r.prefcode] || r.address1;
+
+      // 都道府県セレクトを設定
+      const prefSelect = document.getElementById('shipPref');
+      for (let opt of prefSelect.options) {
+        if (opt.value === prefName) { prefSelect.value = prefName; break; }
+      }
+
+      // 市区町村・番地に address2 + address3 を設定（既入力がなければ）
+      const addrInput = document.getElementById('shipAddr');
+      if (!addrInput.value.trim()) {
+        addrInput.value = r.address2 + r.address3;
+      }
+
+      // エラー表示を消す
+      document.getElementById('shipPrefErr').classList.remove('is-show');
+      prefSelect.classList.remove('is-error');
+    } catch (e) {
+      // API失敗時はそのまま手入力
     }
   });
 </script>
