@@ -659,6 +659,113 @@
     }
     .products__team-link:hover { color: var(--accent); }
 
+    /* ── GUIDE ── */
+    #guide {
+      background: var(--bg);
+      padding: 120px 0;
+    }
+
+    #guide .sec-title { color: var(--text); }
+
+    .sec-subtitle-ja {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(28,28,28,0.6);
+      margin-top: 4px;
+      margin-bottom: 20px;
+    }
+
+    .guide__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .guide-card {
+      background: #ffffff;
+      border: 1px solid rgba(28,28,28,0.08);
+      border-radius: 2px;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .guide-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .guide-card__num {
+      font-family: 'Teko', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .guide-card__title {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .guide-card__body {
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(28,28,28,0.78);
+      flex-grow: 1;
+    }
+
+    .guide-card__body strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .guide-card__ref {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(28,28,28,0.08);
+    }
+
+    .guide-card__ref-label {
+      font-family: 'Teko', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .guide-card__ref-link {
+      display: inline-block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+
+    .guide-card__ref-link:hover {
+      color: var(--accent);
+    }
+
+    .guide-card__ref-note {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: rgba(28,28,28,0.6);
+    }
+
+    @media (max-width: 768px) {
+      .guide__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
     /* ── SCIENCE ── */
     #science {
       background: var(--bg);
@@ -1321,6 +1428,7 @@
     <li><a href="#why" class="nav-close">Why</a></li>
     <li><a href="#concept" class="nav-close">Concept</a></li>
     <li><a href="#products" class="nav-close">Products</a></li>
+    <li><a href="#guide" class="nav-close">Guide</a></li>
     <li><a href="#science" class="nav-close">Science</a></li>
     <li><a href="#team" class="nav-close">Club Plan</a></li>
     <li><a href="#gallery" class="nav-close">Gallery</a></li>
@@ -1554,6 +1662,69 @@
       </p>
       <a href="https://shop.ricemeetu.com/" target="_blank" class="btn btn-gold">すべての商品を見る →</a>
       <a href="/club-apply" class="products__team-link">クラブでまとめて導入する →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GUIDE ========== -->
+<section id="guide">
+  <div class="inner">
+    <div data-anim>
+      <h2 class="sec-title">GUIDE</h2>
+      <p class="sec-subtitle-ja">飲み方ガイド</p>
+      <div class="sec-line"></div>
+
+      <div class="guide__grid">
+
+        <!-- ① そのままパウチで -->
+        <div class="guide-card">
+          <p class="guide-card__num">01</p>
+          <h3 class="guide-card__title">そのままパウチで</h3>
+          <p class="guide-card__body">
+            試合当日、冷凍のまま持ち出せば、キックオフ前にちょうど半解凍状態に。<br>
+            前日の夜に冷蔵庫へ移しておけば、当日朝から飲み始められます。<br>
+            パウチを開けて、そのままお飲みください。
+          </p>
+        </div>
+
+        <!-- ② マイボトルで -->
+        <div class="guide-card">
+          <p class="guide-card__num">02</p>
+          <h3 class="guide-card__title">マイボトルで</h3>
+          <p class="guide-card__body">
+            前日の夜冷蔵庫に移し半解凍にしたRICE!を、口の広い保冷ボトルに氷と一緒に入れれば、試合が終わるまで半解凍状態を保てます。
+          </p>
+          <div class="guide-card__ref">
+            <p class="guide-card__ref-label">参考</p>
+            <a href="https://aandfstore.com/products/19322091" target="_blank" rel="noopener" class="guide-card__ref-link">
+              Klean Kanteen TKWide インシュレート →
+            </a>
+            <p class="guide-card__ref-note">
+              ステンレス製・プラスチックフリーの製造で、RICE!の「自然素材」の思想と共鳴するブランドです。
+            </p>
+          </div>
+        </div>
+
+        <!-- ③ プロテインと一緒に -->
+        <div class="guide-card">
+          <p class="guide-card__num">03</p>
+          <h3 class="guide-card__title">プロテインと一緒に</h3>
+          <p class="guide-card__body">
+            解凍したRICE!にプロテインを加えてシェイカーで混ぜるだけ。<br>
+            練習後のリカバリードリンクとして。
+          </p>
+          <div class="guide-card__ref">
+            <p class="guide-card__ref-label">参考</p>
+            <a href="https://www.amazon.co.jp/dp/B09BQWC4Y2/" target="_blank" rel="noopener" class="guide-card__ref-link">
+              600ml プロテインシェイカー（目盛り・ミキシングボール付き）→
+            </a>
+            <p class="guide-card__ref-note">
+              ※近日、RICE!オリジナルシェイカーを販売開始予定です。
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
