@@ -827,9 +827,24 @@
 
     .team__cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
       margin-top: 48px;
+    }
+
+    /* 価格アンカー */
+    .cta-anchor-wrap {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .cta-price-anchor {
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+      margin-bottom: 5px;
     }
 
     .t-card {
@@ -1305,6 +1320,8 @@
       .hero__bottom { padding: 48px 20px 36px; }
       .hero__cta { flex-direction: column; width: 100%; }
       .hero__cta .btn { width: 100%; text-align: center; }
+      .cta-anchor-wrap { align-items: center; width: 100%; }
+      .cta-anchor-wrap .btn { width: 100%; text-align: center; }
       .hero__sub { font-size: 0.95rem; }
 
       /* SECTIONS - padding reduction */
@@ -1329,7 +1346,7 @@
       .contact__grid { grid-template-columns: 1fr; gap: 32px; }
 
       /* TEAM */
-      .team__cards { grid-template-columns: 1fr; margin-top: 32px; }
+      .team__cards { grid-template-columns: repeat(2, 1fr); margin-top: 32px; }
 
       /* PRODUCTS */
       .products__grid { grid-template-columns: 1fr; }
@@ -1448,7 +1465,10 @@
   <div class="hero__bottom">
     <p class="hero__sub">ソサイチのための、ナチュラルエナジードリンク</p>
     <div class="hero__cta">
-      <a href="#team" class="btn btn-gold">クラブで導入する →</a>
+      <div class="cta-anchor-wrap">
+        <span class="cta-price-anchor">月¥3,500〜</span>
+        <a href="#team" class="btn btn-gold">クラブで導入する →</a>
+      </div>
       <a href="https://shop.ricemeetu.com/" target="_blank" class="btn btn-outline-light">RICE! を購入する →</a>
     </div>
   </div>
@@ -1661,7 +1681,10 @@
       <p style="font-size:0.88rem; color:rgba(255,255,255,0.65); margin-bottom:20px; text-align:center; line-height:1.7;">
         定期購入なら<strong style="color:var(--accent);">ずっと10%OFF</strong>。いつでも停止・変更OK。
       </p>
-      <a href="/club-apply" class="btn btn-gold">クラブでまとめて導入する →</a>
+      <div class="cta-anchor-wrap">
+        <span class="cta-price-anchor">月¥3,500〜</span>
+        <a href="/club-apply" class="btn btn-gold">クラブでまとめて導入する →</a>
+      </div>
       <a href="https://shop.ricemeetu.com/" target="_blank" class="products__team-link">すべての商品を見る →</a>
     </div>
   </div>
@@ -1767,7 +1790,8 @@
       </div>
       <div>
         <p class="team__body">
-          クラブ単位でRICE!を導入しませんか？<br><br>
+          クラブ単位でRICE!を導入しませんか？<br>
+          <strong>月¥3,500から、クラブの規模に合わせて自由に導入できます。</strong><br><br>
           本数・頻度は、クラブの規模と試合数に合わせて自由に設計できます。<br>
           まずはサンプルパックで、クラブメンバー全員の手応えを確かめてください。<br><br>
           定期配送プランなら、試合日に合わせて自動でお届け。<br>
@@ -1788,6 +1812,11 @@
             <h4 class="t-card__title">変更</h4>
             <p class="t-card__amount">いつでも</p>
             <p class="t-card__desc">シーズン・予定に応じて調整可</p>
+          </div>
+          <div class="t-card" data-anim style="transition-delay:.3s; border-top-color:var(--accent);">
+            <h4 class="t-card__title">料金</h4>
+            <p class="t-card__amount" style="font-size:1.25rem;">月¥3,500〜</p>
+            <p class="t-card__desc">最少構成から導入可能</p>
           </div>
         </div>
         <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:32px;">
