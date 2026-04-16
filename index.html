@@ -1448,8 +1448,8 @@
   <div class="hero__bottom">
     <p class="hero__sub">ソサイチのための、ナチュラルエナジードリンク</p>
     <div class="hero__cta">
-      <a href="#team" class="btn btn-gold">クラブで導入する →</a>
-      <a href="https://shop.ricemeetu.com/" target="_blank" class="btn btn-outline-light">RICE! を購入する →</a>
+      <a href="#team" class="btn btn-gold" onclick="gtag('event','club_cta_click',{'button_location':'hero'})">クラブで導入する →</a>
+      <a href="https://shop.ricemeetu.com/" target="_blank" class="btn btn-outline-light" onclick="gtag('event','shop_cta_click',{'button_location':'hero'})">RICE! を購入する →</a>
     </div>
   </div>
 </section>
@@ -1519,7 +1519,7 @@
           <h3 class="p-card__name">BOOST</h3>
           <p class="p-card__desc">試合15分〜30分前に。<br>足のつりが気になる方へにがり由来の「マグネシウム」、<br>効果を持続させるためにてん菜由来の天然の糖「パラチノース」を配合し、<br>キックオフからフルタイムまで全力で動ける身体をサポートします。</p>
           <div class="p-card__sizes">
-            <a href="https://shop.ricemeetu.com/items/108564207" target="_blank" class="p-card__size p-card__size--primary">
+            <a href="https://shop.ricemeetu.com/items/108564207" target="_blank" class="p-card__size p-card__size--primary" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pouch'})">
               <span class="p-card__size-label">
                 <span class="p-card__size-name">パウチ 200ml</span>
                 <span class="p-card__size-sub">ソサイチ1試合に必要なエネルギーをこれ1本で</span>
@@ -1528,7 +1528,7 @@
                 <small>税込 ¥</small><span class="p-card__size-price-num">540</span>
               </span>
             </a>
-            <a href="https://shop.ricemeetu.com/items/141720846" target="_blank" class="p-card__size">
+            <a href="https://shop.ricemeetu.com/items/141720846" target="_blank" class="p-card__size" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pack'})">
               <span class="p-card__size-label">
                 <span class="p-card__size-name">1Lパック</span>
                 <span class="p-card__size-sub">試合日にみんなで、10%おトク</span>
@@ -1555,7 +1555,7 @@
           <h3 class="p-card__name">RECOVERY</h3>
           <p class="p-card__desc">試合後30分以内のゴールデンタイムに。<br>米由来のグルコースときな粉のタンパク質を。<br>回復のスイッチを入れることですみやかなリカバリーをサポートします。</p>
           <div class="p-card__sizes">
-            <a href="https://shop.ricemeetu.com/items/108564320" target="_blank" class="p-card__size p-card__size--primary">
+            <a href="https://shop.ricemeetu.com/items/108564320" target="_blank" class="p-card__size p-card__size--primary" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pouch'})">
               <span class="p-card__size-label">
                 <span class="p-card__size-name">パウチ 200ml</span>
                 <span class="p-card__size-sub">試合直後に1本、その後の食事やプロテインの吸収をサポート</span>
@@ -1564,7 +1564,7 @@
                 <small>税込 ¥</small><span class="p-card__size-price-num">432</span>
               </span>
             </a>
-            <a href="https://shop.ricemeetu.com/items/141721040" target="_blank" class="p-card__size">
+            <a href="https://shop.ricemeetu.com/items/141721040" target="_blank" class="p-card__size" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pack'})">
               <span class="p-card__size-label">
                 <span class="p-card__size-name">1Lパック</span>
                 <span class="p-card__size-sub">試合日にみんなで、10%おトク</span>
@@ -1659,8 +1659,8 @@
       <p style="font-size:0.88rem; color:rgba(255,255,255,0.65); margin-bottom:20px; text-align:center; line-height:1.7;">
         定期購入なら<strong style="color:var(--accent);">ずっと10%OFF</strong>。いつでも停止・変更OK。
       </p>
-      <a href="/club-apply" class="btn btn-gold">クラブでまとめて導入する →</a>
-      <a href="https://shop.ricemeetu.com/" target="_blank" class="products__team-link">すべての商品を見る →</a>
+      <a href="/club-apply" class="btn btn-gold" onclick="gtag('event','club_cta_click',{'button_location':'products'})">クラブでまとめて導入する →</a>
+      <a href="https://shop.ricemeetu.com/" target="_blank" class="products__team-link" onclick="gtag('event','shop_cta_click',{'button_location':'products'})">すべての商品を見る →</a>
     </div>
   </div>
 </section>
@@ -1790,8 +1790,8 @@
           </div>
         </div>
         <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:32px;">
-          <a href="/club-apply" class="btn btn-gold">クラブプランに申し込む →</a>
-          <a href="#contact" class="btn btn-outline-dark">サンプルパックを申し込む →</a>
+          <a href="/club-apply" class="btn btn-gold" onclick="gtag('event','club_cta_click',{'button_location':'clubplan'})">クラブプランに申し込む →</a>
+          <a href="#contact" class="btn btn-outline-dark" onclick="gtag('event','sample_request_click')">サンプルパックを申し込む →</a>
         </div>
       </div>
     </div>
@@ -2172,6 +2172,9 @@
       });
       if (res.ok) {
         btn.textContent = '送信完了 ✓';
+        gtag('event', 'contact_form_submit', {
+          'inquiry_type': document.getElementById('ftype').value
+        });
         this.reset();
       } else {
         btn.textContent = '送信する →';
