@@ -418,26 +418,52 @@
     }
     .p-card__size {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 10px;
       padding: 14px 16px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
-      transition: background 0.2s, border-color 0.2s;
-      text-decoration: none;
-    }
-    .p-card__size:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,215,0,0.4);
     }
     .p-card__size--primary {
       background: rgba(255,215,0,0.08);
       border-color: rgba(255,215,0,0.25);
     }
-    .p-card__size--primary:hover {
-      background: rgba(255,215,0,0.12);
+    .p-card__size-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .p-card__size-btns {
+      display: flex;
+      gap: 8px;
+    }
+    .p-card__size-btn {
+      flex: 1;
+      padding: 7px 6px;
+      font-family: 'M PLUS 1p', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .p-card__size-btn:hover { opacity: 0.85; }
+    .p-card__size-btn--sub {
+      background: var(--accent);
+      color: #1c1c1c;
+    }
+    .p-card__size-btn--once {
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .p-card__size-btn--once:hover {
       border-color: rgba(255,215,0,0.5);
+      color: var(--accent);
     }
     .p-card__size-label {
       display: flex;
@@ -1519,29 +1545,42 @@
           <h3 class="p-card__name">BOOST</h3>
           <p class="p-card__desc">試合15分〜30分前に。<br>足のつりが気になる方へにがり由来の「マグネシウム」、<br>効果を持続させるためにてん菜由来の天然の糖「パラチノース」を配合し、<br>キックオフからフルタイムまで全力で動ける身体をサポートします。</p>
           <div class="p-card__sizes">
-            <a href="https://shop.ricemeetu.com/items/108564207" target="_blank" class="p-card__size p-card__size--primary" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pouch'})">
-              <span class="p-card__size-label">
-                <span class="p-card__size-name">パウチ 200ml</span>
-                <span class="p-card__size-sub">ソサイチ1試合に必要なエネルギーをこれ1本で</span>
-              </span>
-              <span class="p-card__size-price">
-                <small>税込 ¥</small><span class="p-card__size-price-num">540</span>
-              </span>
-            </a>
-            <a href="https://shop.ricemeetu.com/items/141720846" target="_blank" class="p-card__size" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pack'})">
-              <span class="p-card__size-label">
-                <span class="p-card__size-name">1Lパック</span>
-                <span class="p-card__size-sub">試合日にみんなで、10%おトク</span>
-              </span>
-              <span class="p-card__size-price">
-                <small>税込 ¥</small><span class="p-card__size-price-num">2,430</span>
-              </span>
-            </a>
-          </div>
-          <div class="p-card__sub-price">
-            <span class="p-card__sub-price-label">定期なら（税込）</span>
-            <span class="p-card__sub-price-was">¥540</span>
-            <span class="p-card__sub-price-now">→ ずっと¥486</span>
+            <!-- パウチ 200ml -->
+            <div class="p-card__size p-card__size--primary">
+              <div class="p-card__size-top">
+                <span class="p-card__size-label">
+                  <span class="p-card__size-name">パウチ 200ml</span>
+                  <span class="p-card__size-sub">ソサイチ1試合に必要なエネルギーをこれ1本で</span>
+                </span>
+                <span class="p-card__size-price">
+                  <small>税込 ¥</small><span class="p-card__size-price-num">540</span>
+                </span>
+              </div>
+              <div class="p-card__size-btns">
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('boost_pouch_sub')" -->
+                <a href="https://shop.ricemeetu.com/items/108564207" target="_blank" class="p-card__size-btn p-card__size-btn--sub" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pouch_sub'})">定期購入（初回20%OFF）</a>
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('boost_pouch_once')" -->
+                <a href="https://shop.ricemeetu.com/items/108564207" target="_blank" class="p-card__size-btn p-card__size-btn--once" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pouch_once'})">1回限り</a>
+              </div>
+            </div>
+            <!-- 1Lパック -->
+            <div class="p-card__size">
+              <div class="p-card__size-top">
+                <span class="p-card__size-label">
+                  <span class="p-card__size-name">1Lパック</span>
+                  <span class="p-card__size-sub">試合日にみんなで、10%おトク</span>
+                </span>
+                <span class="p-card__size-price">
+                  <small>税込 ¥</small><span class="p-card__size-price-num">2,430</span>
+                </span>
+              </div>
+              <div class="p-card__size-btns">
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('boost_pack_sub')" -->
+                <a href="https://shop.ricemeetu.com/items/141720846" target="_blank" class="p-card__size-btn p-card__size-btn--sub" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pack_sub'})">定期購入（初回20%OFF）</a>
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('boost_pack_once')" -->
+                <a href="https://shop.ricemeetu.com/items/141720846" target="_blank" class="p-card__size-btn p-card__size-btn--once" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'boost_pack_once'})">1回限り</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1555,29 +1594,42 @@
           <h3 class="p-card__name">RECOVERY</h3>
           <p class="p-card__desc">試合後30分以内のゴールデンタイムに。<br>米由来のグルコースときな粉のタンパク質を。<br>回復のスイッチを入れることですみやかなリカバリーをサポートします。</p>
           <div class="p-card__sizes">
-            <a href="https://shop.ricemeetu.com/items/108564320" target="_blank" class="p-card__size p-card__size--primary" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pouch'})">
-              <span class="p-card__size-label">
-                <span class="p-card__size-name">パウチ 200ml</span>
-                <span class="p-card__size-sub">試合直後に1本、その後の食事やプロテインの吸収をサポート</span>
-              </span>
-              <span class="p-card__size-price">
-                <small>税込 ¥</small><span class="p-card__size-price-num">432</span>
-              </span>
-            </a>
-            <a href="https://shop.ricemeetu.com/items/141721040" target="_blank" class="p-card__size" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pack'})">
-              <span class="p-card__size-label">
-                <span class="p-card__size-name">1Lパック</span>
-                <span class="p-card__size-sub">試合日にみんなで、10%おトク</span>
-              </span>
-              <span class="p-card__size-price">
-                <small>税込 ¥</small><span class="p-card__size-price-num">1,944</span>
-              </span>
-            </a>
-          </div>
-          <div class="p-card__sub-price">
-            <span class="p-card__sub-price-label">定期なら（税込）</span>
-            <span class="p-card__sub-price-was">¥432</span>
-            <span class="p-card__sub-price-now">→ ずっと¥389</span>
+            <!-- パウチ 200ml -->
+            <div class="p-card__size p-card__size--primary">
+              <div class="p-card__size-top">
+                <span class="p-card__size-label">
+                  <span class="p-card__size-name">パウチ 200ml</span>
+                  <span class="p-card__size-sub">試合直後に1本、その後の食事やプロテインの吸収をサポート</span>
+                </span>
+                <span class="p-card__size-price">
+                  <small>税込 ¥</small><span class="p-card__size-price-num">432</span>
+                </span>
+              </div>
+              <div class="p-card__size-btns">
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('recovery_pouch_sub')" -->
+                <a href="https://shop.ricemeetu.com/items/108564320" target="_blank" class="p-card__size-btn p-card__size-btn--sub" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pouch_sub'})">定期購入（初回20%OFF）</a>
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('recovery_pouch_once')" -->
+                <a href="https://shop.ricemeetu.com/items/108564320" target="_blank" class="p-card__size-btn p-card__size-btn--once" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pouch_once'})">1回限り</a>
+              </div>
+            </div>
+            <!-- 1Lパック -->
+            <div class="p-card__size">
+              <div class="p-card__size-top">
+                <span class="p-card__size-label">
+                  <span class="p-card__size-name">1Lパック</span>
+                  <span class="p-card__size-sub">試合日にみんなで、10%おトク</span>
+                </span>
+                <span class="p-card__size-price">
+                  <small>税込 ¥</small><span class="p-card__size-price-num">1,944</span>
+                </span>
+              </div>
+              <div class="p-card__size-btns">
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('recovery_pack_sub')" -->
+                <a href="https://shop.ricemeetu.com/items/141721040" target="_blank" class="p-card__size-btn p-card__size-btn--sub" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pack_sub'})">定期購入（初回20%OFF）</a>
+                <!-- TODO: Stripe移行後 href="#" onclick="startCheckout('recovery_pack_once')" -->
+                <a href="https://shop.ricemeetu.com/items/141721040" target="_blank" class="p-card__size-btn p-card__size-btn--once" onclick="gtag('event','shop_cta_click',{'button_location':'product_card','product':'recovery_pack_once'})">1回限り</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2210,6 +2262,43 @@ document.querySelectorAll('.faq__question').forEach(q => {
     }
   });
 });
+
+// ── Stripe チェックアウト ──
+// ※ Stripeアカウント開設後、STRIPE_API_URLと各PRICE_IDを差し替えてください
+const STRIPE_API_URL = 'https://ricemeetu-stripe-api.vercel.app'; // TODO: Vercelデプロイ後に更新
+
+const STRIPE_PRICES = {
+  // 定期購入（subscription）
+  boost_pouch_sub:    'price_XXXXXXXXXX', // TODO: Stripe Price IDに差し替え
+  boost_pack_sub:     'price_XXXXXXXXXX',
+  recovery_pouch_sub: 'price_XXXXXXXXXX',
+  recovery_pack_sub:  'price_XXXXXXXXXX',
+  // 1回限り（one-time）
+  boost_pouch_once:    'price_XXXXXXXXXX', // TODO: Stripe Price IDに差し替え
+  boost_pack_once:     'price_XXXXXXXXXX',
+  recovery_pouch_once: 'price_XXXXXXXXXX',
+  recovery_pack_once:  'price_XXXXXXXXXX',
+};
+
+async function startCheckout(productKey) {
+  gtag('event', 'shop_cta_click', { button_location: 'product_card', product: productKey });
+  try {
+    const res = await fetch(`${STRIPE_API_URL}/api/create-checkout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ priceId: STRIPE_PRICES[productKey] }),
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('決済ページの読み込みに失敗しました。しばらく経ってから再度お試しください。');
+    }
+  } catch (err) {
+    console.error('Checkout error:', err);
+    alert('決済ページの読み込みに失敗しました。しばらく経ってから再度お試しください。');
+  }
+}
 </script>
 </body>
 </html>
