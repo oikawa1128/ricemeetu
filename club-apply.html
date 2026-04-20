@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>クラブプラン申込 | RICE MEET U</title>
-  <meta name="robots" content="noindex">
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -811,7 +810,7 @@
     <!-- 注意書き -->
     <div class="apply-note">
       <strong>【お支払いについて】</strong><br>
-      オンライン決済を選択された場合、申込後にお支払い用リンクをお送りします。<br>
+      オンライン決済を選択された場合、申込完了後にStripeの決済ページへ移動します。初回は20%OFF、2回目以降は自動的に10%OFFが適用されます。<br>
       銀行振込を選択された場合、担当者よりお振込先をご案内いたします。<br><br>
       ※ お届け希望日はあくまで「希望」であり、在庫・物流状況に応じて調整となる場合があります。
     </div>
@@ -982,6 +981,7 @@
     const totalQty   = pb + pr + kb + kr;
     const totalPrice = pb * PRICES.pouchBoost.sale + pr * PRICES.pouchRecovery.sale
                      + kb * PRICES.packBoost.sale  + kr * PRICES.packRecovery.sale;
+    const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
 
     const payload = {
       appType:      document.querySelector('input[name="appType"]:checked').value,
@@ -1002,20 +1002,57 @@
       shipBuilding: document.getElementById('shipBuilding').value.trim(),
       frequency:    document.querySelector('input[name="frequency"]').value,
       deliveryDay:  document.getElementById('deliveryDay').value,
-      payment:      document.querySelector('input[name="payment"]:checked').value,
+      payment:      paymentMethod,
       remarks:      document.getElementById('remarks').value.trim()
     };
 
     try {
+      // GASにスプレッドシート記録（支払い方法問わず）
       const params = new URLSearchParams(payload);
       await fetch(GAS_URL + '?' + params.toString(), {
         method: 'GET',
         mode: 'no-cors'
       });
-      // no-cors のためレスポンスは読めないが正常とみなす
-      document.getElementById('applyForm').style.display = 'none';
-      document.getElementById('thankyou').classList.add('is-show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // ── オンライン決済 → Stripeチェックアウトへ ──
+      if (paymentMethod === 'オンライン決済') {
+
+        // TODO: Stripeアカウント開設後に各PRICE IDを差し替え
+        const STRIPE_API_URL = 'https://ricemeetu-stripe-api.vercel.app'; // TODO: Vercelデプロイ後に更新
+        const CLUB_PRICES = {
+          pouchBoost:    'price_XXXXXXXXXX', // TODO: 差し替え
+          pouchRecovery: 'price_XXXXXXXXXX', // TODO: 差し替え
+          packBoost:     'price_XXXXXXXXXX', // TODO: 差し替え
+          packRecovery:  'price_XXXXXXXXXX', // TODO: 差し替え
+        };
+
+        const lineItems = [
+          { priceId: CLUB_PRICES.pouchBoost,    quantity: pb },
+          { priceId: CLUB_PRICES.pouchRecovery, quantity: pr },
+          { priceId: CLUB_PRICES.packBoost,     quantity: kb },
+          { priceId: CLUB_PRICES.packRecovery,  quantity: kr },
+        ].filter(item => item.quantity > 0);
+
+        const stripeRes = await fetch(`${STRIPE_API_URL}/api/create-checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lineItems }),
+        });
+        const stripeData = await stripeRes.json();
+
+        if (stripeData.url) {
+          window.location.href = stripeData.url;
+        } else {
+          throw new Error('Stripe URLの取得に失敗しました');
+        }
+
+      } else {
+        // ── 銀行振込 → サンクス画面へ ──
+        document.getElementById('applyForm').style.display = 'none';
+        document.getElementById('thankyou').classList.add('is-show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
     } catch(err) {
       btn.textContent = '申し込む →';
       btn.disabled = false;
